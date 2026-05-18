@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS otus_tab_crm_data;
