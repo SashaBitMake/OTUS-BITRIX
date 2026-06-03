@@ -1,5 +1,8 @@
 <?php
 
+use Bitrix\Main\EventManager;
+use Bitrix\Main\UI\Extension;
+
 // composer
 if (file_exists(__DIR__ . '/../../vendor/autoload.php'))
 {
@@ -19,4 +22,9 @@ if (\Bitrix\Main\Loader::includeModule('iblock')) {
         'OnIBlockPropertyBuildList',
         ['\App\Iblock\Properties\DoctorBookingProperty', 'GetUserTypeDescription']
     );
+}
+
+// Подключение кастомных событий
+if (file_exists(__DIR__ . '/src/Otus/timeWindow.php')) {
+    require_once(__DIR__ . '/src/Otus/timeWindow.php');
 }
