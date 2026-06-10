@@ -3,6 +3,9 @@
 use Bitrix\Main\EventManager;
 use Bitrix\Main\UI\Extension;
 
+//класс для DaData
+include_once __DIR__ .'/src/Otus/Dadata.php';
+
 // composer
 if (file_exists(__DIR__ . '/../../vendor/autoload.php'))
 {
