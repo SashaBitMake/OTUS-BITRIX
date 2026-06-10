@@ -5,6 +5,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 use Bitrix\Bizproc\Activity\BaseActivity;
+use Bitrix\Bizproc\FieldType;
+use Bitrix\Bizproc\Activity\PropertiesDialog;
 use Bitrix\Main\Error;
 use Bitrix\Main\ErrorCollection;
 use Bitrix\Main\Localization\Loc;
@@ -19,6 +21,7 @@ if (!class_exists('TooManyRequests')) {
     {
     }
 }
+
 
 /**
  * Действие бизнес-процесса для поиска компании по ИНН через сервис DaData.
@@ -60,6 +63,30 @@ class CBPDadatafindcompanyActivity extends BaseActivity
     protected static function getFileName(): string
     {
         return __FILE__;
+    }
+
+    public static function getPropertiesDialogMap(?PropertiesDialog $dialog = null): array
+    {
+        return [
+            'DadataToken' => [
+                'Name' => Loc::getMessage('DADATA_FIND_COMPANY_TOKEN'),
+                'FieldName' => 'dadata_token',
+                'Type' => FieldType::STRING,
+                'Required' => true,
+            ],
+            'DadataSecret' => [
+                'Name' => Loc::getMessage('DADATA_FIND_COMPANY_SECRET'),
+                'FieldName' => 'dadata_secret',
+                'Type' => FieldType::STRING,
+                'Required' => false,
+            ],
+            'CompanyInn' => [
+                'Name' => Loc::getMessage('DADATA_FIND_COMPANY_INN'),
+                'FieldName' => 'company_inn',
+                'Type' => FieldType::STRING,
+                'Required' => true,
+            ],
+        ];
     }
 
     /**
