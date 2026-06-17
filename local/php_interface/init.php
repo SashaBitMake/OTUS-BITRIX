@@ -2,6 +2,7 @@
 
 use Bitrix\Main\EventManager;
 use Bitrix\Main\UI\Extension;
+use Bitrix\Main\Loader;
 
 //класс для DaData
 include_once __DIR__ .'/src/Otus/Dadata.php';
@@ -30,4 +31,14 @@ if (\Bitrix\Main\Loader::includeModule('iblock')) {
 // Подключение кастомных событий
 if (file_exists(__DIR__ . '/src/Otus/timeWindow.php')) {
     require_once(__DIR__ . '/src/Otus/timeWindow.php');
+}
+
+// Автозагрузка для обработчиков событий из local/events/
+Loader::registerAutoLoadClasses(null, [
+    'Local\Events\SynchronizationHandler' => '/local/events/SynchronizationHandler.php',
+]);
+
+// Подключение кастомных событий ДЗ
+if (file_exists(__DIR__ . '/src/Otus/events_extra.php')) {
+    require_once(__DIR__ . '/src/Otus/events_extra.php');
 }
