@@ -1,0 +1,3 @@
+<?php
+
+$MESS['OTUS_SC_GARAGE_PARAM_CONTACT_ID'] = 'ID контакта CRM';
