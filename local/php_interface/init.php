@@ -42,3 +42,22 @@ Loader::registerAutoLoadClasses(null, [
 if (file_exists(__DIR__ . '/src/Otus/events_extra.php')) {
     require_once(__DIR__ . '/src/Otus/events_extra.php');
 }
+
+// === REST otus.book.* ===
+// Все классы лежат в /local/php_interface/src/Otus/... (namespace Otus\...)
+
+Loader::registerAutoLoadClasses(null, [
+    'Otus\Orm\BookTable' => '/local/php_interface/src/Otus/Orm/BookTable.php',
+    'Otus\Service\BookService' => '/local/php_interface/src/Otus/Service/BookService.php',
+    'Otus\Rest\Events' => '/local/php_interface/src/Otus/Rest/Events.php',
+    'Otus\Rest\Logger' => '/local/php_interface/src/Otus/Rest/Logger.php',
+]);
+
+// Регистрация кастомных REST-методов otus.book.* и otus.getHttpInfo.
+// init.php выполняется на каждом хите, поэтому обработчик регистрируется
+// постоянно, а не только при открытии отдельной admin-страницы.
+EventManager::getInstance()->addEventHandlerCompatible(
+    'rest',
+    'OnRestServiceBuildDescription',
+    ['Otus\Rest\Events', 'OnRestServiceBuildDescriptionHandler']
+);
